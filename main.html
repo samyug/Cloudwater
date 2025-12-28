@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterdoor Research – Independent Policy Analysis</title>
+    <style>
+        /* ROOT VARIABLES */
+        :root {
+            --color-bg-primary: #0f0e0c;
+            --color-bg-secondary: #1a1915;
+            --color-bg-tertiary: #24231f;
+            --color-text-primary: #e8e8e8;
+            --color-text-secondary: #a8a8a8;
+            --color-text-tertiary: #707070;
+            --color-accent: #e6ddc9;
+            --color-accent-light: #f0eae0;
+            --color-border: #2d2a25;
+            --font-serif: 'Georgia', 'Garamond', serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+        }
+
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: var(--spacing-md);
+        }
+
+        h1 {
+            font-size: 48px;
+            letter-spacing: -0.5px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        h2 {
+            font-size: 36px;
+            letter-spacing: -0.3px;
+        }
+
+        h3 {
+            font-size: 24px;
+        }
+
+        h4 {
+            font-size: 18px;
+        }
+
+        p {
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-primary);
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        a:hover {
+            color: var(--color-accent-light);
+            border-bottom: 1px solid var(--color-accent);
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: var(--color-bg-primary);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 10, 0.95);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 32px;
+            width: 32px;
+            object-fit: contain;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-xl);
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+            border: none;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+            border: none;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-xl);
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-symbol {
+            height: 120px;
+            width: 120px;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+            object-fit: contain;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: var(--spacing-lg) auto;
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        .section {
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        /* ABOUT SECTION */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            margin-bottom: var(--spacing-lg);
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--color-text-primary);
+        }
+
+        /* RESEARCH AREAS */
+        .research-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .research-area {
+            border-left: 2px solid var(--color-accent);
+            padding-left: var(--spacing-lg);
+        }
+
+        .research-area h3 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .research-area p {
+            color: var(--color-text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* PUBLICATIONS */
+        .publications-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .publication-item {
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-lg) 0;
+        }
+
+        .publication-item:first-child {
+            border-top: none;
+        }
+
+        .pub-title {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-primary);
+        }
+
+        .pub-meta {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pub-abstract {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* METHODOLOGY */
+        .methodology-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .methodology-content p {
+            margin-bottom: var(--spacing-lg);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .methodology-list {
+            list-style: none;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .methodology-list li {
+            padding: var(--spacing-md) 0;
+            padding-left: var(--spacing-lg);
+            border-left: 2px solid var(--color-accent);
+            color: var(--color-text-primary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* INDEPENDENCE */
+        .independence-box {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-left: 3px solid var(--color-accent);
+            padding: var(--spacing-lg);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .independence-box h3 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .independence-box p {
+            font-size: 15px;
+            color: var(--color-text-primary);
+        }
+
+        /* CONTACT SECTION */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            margin-top: var(--spacing-xl);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent);
+            padding: var(--spacing-sm) var(--spacing-xl);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--color-accent);
+            color: var(--color-bg-primary);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--color-bg-secondary);
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-xl) var(--spacing-lg);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--spacing-xl);
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .footer-symbol {
+            height: 24px;
+            width: 24px;
+            object-fit: contain;
+            opacity: 0.6;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            line-height: 1.6;
+        }
+
+        .footer-text strong {
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+
+        .footer-disclaimer {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        /* DIVIDER */
+        .divider {
+            height: 1px;
+            background-color: var(--color-border);
+            margin: var(--spacing-xl) 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .nav-links {
+                gap: var(--spacing-md);
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .hero-symbol {
+                height: 80px;
+                width: 80px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .tagline {
+                font-size: 16px;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section {
+                padding: var(--spacing-xl) var(--spacing-md);
+            }
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                color: #000;
+            }
+
+            header, footer {
+                display: none;
+            }
+
+            .section {
+                page-break-inside: avoid;
+                border-bottom: 2px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <div style="flex: 1; display: flex; align-items: center; gap: var(--spacing-md);">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/bb456f21-562f-4893-9082-7d174e9b2080" alt="Waterdoor Research" class="logo">
+                <span style="font-family: var(--font-serif); font-size: 16px; color: var(--color-text-primary); font-weight: 600; letter-spacing: -0.3px;">Waterdoor Research</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="scrollTo('home')">Home</a></li>
+                <li><a href="#about" onclick="scrollTo('about')">About</a></li>
+                <li><a href="#research" onclick="scrollTo('research')">Research</a></li>
+                <li><a href="#publications" onclick="scrollTo('publications')">Publications</a></li>
+                <li><a href="#contact" onclick="scrollTo('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/bb456f21-562f-4893-9082-7d174e9b2080" alt="Waterdoor Research Symbol" class="hero-symbol">
+        <h1>Waterdoor Research</h1>
+        <p class="tagline">Independent analysis of state policy and its real-world consequences.</p>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <p>
+                    Waterdoor Research is an independent policy research institute dedicated to rigorous, evidence-based analysis of government policy decisions and their measurable effects on citizens and institutions.
+                </p>
+                <p>
+                    We operate at the intersection of public policy, fiscal accountability, and long-term social impact. Our research is guided by a commitment to intellectual rigor, empirical evidence, and transparent methodology—not political convenience or ideological certainty.
+                </p>
+                <p>
+                    <strong>Independence</strong> is foundational to our work. We accept no funding from political parties, state bodies, or partisan advocacy organizations. Our research is driven solely by the pursuit of understanding policy consequences with clarity and candor.
+                </p>
+                <p>
+                    <strong>Skepticism</strong> is our default posture. We question government claims and public narratives with equal scrutiny. We test assumptions against evidence. We identify unintended consequences. We examine the gap between policy intention and policy effect.
+                </p>
+                <p>
+                    <strong>Accountability</strong> underpins our methodology. We believe citizens deserve transparent analysis of how state resources are allocated, how institutions perform, and who bears the costs of policy decisions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESEARCH AREAS -->
+    <section id="research" class="section">
+        <div class="container">
+            <h2 class="section-title">Research Areas</h2>
+            <div class="research-grid">
+                <div class="research-area">
+                    <h3>Public Finance & Welfare Policy</h3>
+                    <p>Analysis of government spending, tax policy, subsidy design, and welfare program implementation. We examine fiscal sustainability, distributional outcomes, and the effectiveness of public resource allocation.</p>
+                </div>
+                <div class="research-area">
+                    <h3>Governance & State Capacity</h3>
+                    <p>Study of institutional performance, bureaucratic efficiency, policy implementation mechanisms, and the relationship between government design and policy outcomes.</p>
+                </div>
+                <div class="research-area">
+                    <h3>Institutional Accountability</h3>
+                    <p>Examination of transparency mechanisms, public accountability frameworks, and oversight institutions. We analyze gaps between mandates and performance, and the role of information in democratic accountability.</p>
+                </div>
+                <div class="research-area">
+                    <h3>Long-Term Economic Impact</h3>
+                    <p>Longitudinal assessment of policy consequences on economic growth, employment, inequality, and productivity. We track how policy decisions today shape economic outcomes and institutional capacity tomorrow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METHODOLOGY -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Methodology</h2>
+            <div class="methodology-content">
+                <p>
+                    Our research approach is grounded in empirical rigor and transparent methodology. We combine quantitative analysis with qualitative investigation, historical context with contemporary data.
+                </p>
+                <ul class="methodology-list">
+                    <li><strong>Data-Driven Analysis</strong>: We rely on government records, administrative data, survey results, and published research. We are explicit about data limitations and sources.</li>
+                    <li><strong>Comparative Method</strong>: We examine how similar policies perform across jurisdictions and time periods, identifying what works, what fails, and why.</li>
+                    <li><strong>Implementation Focus</strong>: We examine the gap between policy design and execution. Intent is not outcome.</li>
+                    <li><strong>Long-Term Tracking</strong>: We follow policies forward, measuring consequences across years and decades, not just immediate effects.</li>
+                    <li><strong>Transparent Uncertainty</strong>: We are clear about what we know, what we estimate, and what remains unknown. We communicate confidence levels and identify alternatives to our interpretations.</li>
+                    <li><strong>Peer Engagement</strong>: Our research is subject to critique from economists, policy researchers, government analysts, and the informed public.</li>
+                    <li><strong>AI-Assisted Analysis</strong>: We employ machine learning and computational methods to identify patterns in large policy datasets, support document analysis, and augment researcher capabilities. All AI outputs are validated through human review and statistical testing.</li>
+                </ul>
+                <p style="margin-top: var(--spacing-xl);">
+                    We publish findings as research papers, policy briefs, and detailed commentaries. Our reports include full methodological documentation, data sources, and code availability where applicable.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="section">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="publications-list">
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-primary); margin-bottom: var(--spacing-md);">
+                        Waterdoor Research is currently conducting rigorous, independent research across our core policy domains. Our initial publications are in advanced stages of preparation and will be released on a rolling basis as they meet our standards for methodological rigor, empirical validation, and transparent documentation.
+                    </p>
+                    <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-primary); margin-bottom: var(--spacing-md);">
+                        We prioritize evidence quality and analytical depth over publication frequency. Our first major reports will address policy implementation, fiscal sustainability, and institutional capacity—themes central to our research mission.
+                    </p>
+                    <p style="font-size: 15px; color: var(--color-text-secondary);">
+                        Check back regularly for updates. Journalists, researchers, and policymakers interested in our work may contact us directly to discuss ongoing research and emerging findings.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INDEPENDENCE & DISCLOSURES -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Independence & Disclosures</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <h3 style="font-family: var(--font-serif); font-size: 24px; font-weight: 600; margin-bottom: var(--spacing-md);">Our Commitment to Independence</h3>
+                <p style="font-size: 15px; color: var(--color-text-primary); margin-bottom: var(--spacing-md);">
+                    Waterdoor Research is organizationally and financially independent. We accept no funding from political parties, government bodies, state-affiliated entities, or partisan advocacy organizations. We do not lobby, advocate for policy positions, or campaign for candidates.
+                </p>
+                <p style="font-size: 15px; color: var(--color-text-primary); margin-top: var(--spacing-md); margin-bottom: var(--spacing-md);">
+                    Our research reflects the professional judgment of our analysts based on evidence and methodology. Individual researchers may hold personal political views, but our institutional outputs are shaped by analytical standards, not ideological predetermination. We publish findings that challenge our own prior assumptions when evidence requires it.
+                </p>
+                <p style="font-size: 15px; color: var(--color-text-primary); margin-top: var(--spacing-md);">
+                    We are transparent about funding sources (where applicable), researcher backgrounds, and methodological choices. We welcome scrutiny of our work and engage substantively with critiques and alternative interpretations of evidence.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-primary);">
+                    For inquiries about our research, collaboration opportunities, and to discuss policy analysis, contact us at <a href="mailto:contact@waterdoor.in">contact@waterdoor.in</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/bb456f21-562f-4893-9082-7d174e9b2080" alt="Waterdoor Research" class="footer-symbol">
+                <div class="footer-text">
+                    <strong>Waterdoor Research</strong><br>
+                    © 2025. All rights reserved.<br>
+                </div>
+            </div>
+            <div class="footer-disclaimer">
+                <p>An independent research institution committed to evidence-based analysis of public policy and governance. Not affiliated with any political party or government body.</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                <div style="font-size: 12px; color: var(--color-text-tertiary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">Follow Us</div>
+                <div style="display: flex; gap: var(--spacing-lg);">
+                    <a href="https://www.linkedin.com/company/waterdoor/" target="_blank" rel="noopener noreferrer" style="font-size: 13px; color: var(--color-text-secondary); border: none;">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function scrollTo(id) {
+            event.preventDefault();
+            const element = document.getElementById(id);
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && subject && message) {
+                alert(`Thank you for your message. We have received your inquiry and will respond shortly.`);
+                document.querySelector('.contact-form').reset();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+    </script>
+</body>
+</html>
